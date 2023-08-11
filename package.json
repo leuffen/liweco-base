@@ -17,15 +17,15 @@
   ],
   "author": "",
   "dependencies": {
-    "@kasimirjs/embed": "^1.1"
+    "@kasimirjs/embed": "^1.1.4"
   },
   "devDependencies": {
-    "dart-sass": "^1.25.0",
-    "sass": "^1.56.1",
     "css-loader": "^6.7.1",
+    "dart-sass": "^1.25.0",
     "esbuild-loader": "^2.20.0",
     "mini-css-extract-plugin": "^2.6.1",
     "raw-loader": "^4.0.2",
+    "sass": "^1.56.1",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "webpack": "^5.75.0",
