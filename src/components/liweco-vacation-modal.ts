@@ -88,10 +88,6 @@ export class LiwecoVacationModal extends HTMLElement {
         }
         let openhoursData : LeuOpenHours = window["openhours"];
 
-        if ( ! (openhoursData instanceof LeuOpenHours)) {
-            console.error("openhours is not of type OpenhoursInterface", openhoursData);
-        }
-
 
         let openhours = new OfficeHours();
         openhours.loadStruct(openhoursData);
