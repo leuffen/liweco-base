@@ -10,7 +10,7 @@ Opening Hours Parsers, Vacation Modals, etc.
 ### Vacation Modal `<liweco-vacation-modal>`
 
 
-
+### Collapsing Opening Hours Table `<liweco-collapse-openhour-table>`
 
 
 
