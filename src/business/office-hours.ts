@@ -137,7 +137,7 @@ export class OfficeHours {
         inputData.json.forEach(hour => {
             if (hour.status === "open") {  // Assuming you want to only add hours when the status is 'open'
                 const day = typeof hour.dayOfWeek === 'number' ? DAY_OF_WEEK[hour.dayOfWeek] : hour.dayOfWeek;
-                this.addOpenHour(day, hour.from, hour.to);
+                this.addOpenHour(day, hour.from as string, hour.to as string);
             }
         });
 
