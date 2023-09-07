@@ -9,6 +9,8 @@ Opening Hours Parsers, Vacation Modals, etc.
 
 ### Vacation Modal `<liweco-vacation-modal>`
 
+### News Text `<liweco-news>No upcoming news</liweco-news>`
+
 
 ### Collapsing Opening Hours Table `<liweco-collapse-openhour-table>`
 

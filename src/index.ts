@@ -3,4 +3,5 @@ export * from "./types/leu-openhours";
 export * from "./components/liweco-vacation-modal";
 
 import  "./components/liweco-vacation-modal";
+import  "./components/liweco-news";
 import "./components/liweco-collapse-openhour-table";

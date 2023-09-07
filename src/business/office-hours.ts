@@ -67,6 +67,29 @@ export class OfficeHours {
         return vacation ? { title: vacation.title, text: vacation.text } : null;
     }
 
+    getUpcomingVacation(interval: TimeInterval | null = null): Vacation[] {
+        const currentDate = new Date();
+        const endDate = new Date(currentDate);
+
+        if (interval === null) {
+            return this.vacations.filter(vacation => vacation.tillDate >= currentDate);
+        }
+        if (interval.days) {
+            endDate.setDate(endDate.getDate() + interval.days);
+        }
+
+        if (interval.months) {
+            endDate.setMonth(endDate.getMonth() + interval.months);
+        }
+
+        return this.vacations.filter(vacation =>
+            (vacation.fromDate >= currentDate && vacation.fromDate <= endDate) ||
+            (vacation.tillDate >= currentDate && vacation.tillDate <= endDate) ||
+            (vacation.fromDate <= currentDate && vacation.tillDate >= endDate)
+        );
+
+    }
+
     isOpen(dateTime: Date | string | null = null): boolean {
         const dateObj = OfficeHours.convertToDateTime(dateTime);
         return !this.isVacation(dateObj) && this.getTodayOpenDates(dateObj).some(hour => {
@@ -109,24 +132,6 @@ export class OfficeHours {
         }
     }
 
-    getUpcomingVacation(interval: TimeInterval): Vacation[] {
-        const currentDate = new Date();
-        const endDate = new Date(currentDate);
-
-        if (interval.days) {
-            endDate.setDate(endDate.getDate() + interval.days);
-        }
-
-        if (interval.months) {
-            endDate.setMonth(endDate.getMonth() + interval.months);
-        }
-
-        return this.vacations.filter(vacation =>
-            (vacation.fromDate >= currentDate && vacation.fromDate <= endDate) ||
-            (vacation.tillDate >= currentDate && vacation.tillDate <= endDate) ||
-            (vacation.fromDate <= currentDate && vacation.tillDate >= endDate)
-        );
-    }
 
     loadStruct(inputData: LeuOpenHours): void {
         // Clear existing data
