@@ -22,6 +22,8 @@ export class LiwecoVacationModal extends HTMLElement {
         await ka_dom_ready();
         await ka_sleep(100);
 
+        let dataClass = this.getAttribute("data-class");
+
         if (typeof window["openhours"] === "undefined") {
             console.error("[liweco-news] window.openhours not defined");
             return;
@@ -38,14 +40,15 @@ export class LiwecoVacationModal extends HTMLElement {
 
         this.innerHTML = "";
 
+        let newsDiv = ka_create_element("div", {"data-owner": "liweco-news", class: dataClass}, "", this);
+        let msgCount = 0;
         for (let curVac of openhours.getUpcomingVacation(null)) {
-            ka_create_element("div", {"owner": "liweco-vacaction"}, [
-                ka_create_element("span", {"class": "liweco-vacation__date"}, curVac.fromDate.toLocaleDateString() + " - " + curVac.tillDate.toLocaleDateString() + ": "),
-                ka_create_element("span", {"class": "liweco-vacation__title", "title": curVac.text}, curVac.title),
-            ], this);
+            msgCount++;
+            ka_create_element("p", {"data-owner": "liweco-vacaction"}, curVac.title, newsDiv);
         }
 
-        if (this.innerHTML.trim() === "") {
+        if (msgCount === 0) {
+            this.classList.add("no-news");
             this.innerHTML = this.default;
         }
 
