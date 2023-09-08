@@ -1,6 +1,7 @@
 import {customElement, ka_create_element, ka_dom_ready, ka_sleep} from "@kasimirjs/embed";
 import {LeuOpenHours} from "../types/leu-openhours";
 import {OfficeHours} from "../business/office-hours";
+import {markdownToHtml} from "../helper/functions";
 
 const defaultModalTemplate = `
 <div class="modal-backdrop fade"></div>
@@ -8,9 +9,9 @@ const defaultModalTemplate = `
 
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable %%classes%%" role="dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header position-relative">
                 <h5 class="modal-title">%%title%%</h5>
-                <button type="button" class="btn-close" data-leu-dismiss="modal" aria-label="Schließen"></button>
+                <button type="button" class="btn-close position-absolute top-0 end-0 p-4" style="top: 0" data-leu-dismiss="modal" aria-label="Schließen"></button>
             </div>
             <div class="modal-body">
                 %%body%%
@@ -55,8 +56,8 @@ export class LiwecoVacationModal extends HTMLElement {
         document.body.style.overflow = "hidden";
 
         let content = defaultModalTemplate;
-        content = content.replace("%%title%%", meta.title)
-            .replace("%%body%%", meta.text.replace(/\n/g, "<br>"))
+        content = content.replace("%%title%%", markdownToHtml(meta.title))
+            .replace("%%body%%", markdownToHtml(meta.text.replace(/\n/g, "<br>")))
             .replace("%%classes%%", meta.classes ?? "");
         this.showElement.innerHTML = content;
         await ka_sleep(10);

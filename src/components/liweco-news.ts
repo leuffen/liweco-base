@@ -1,6 +1,7 @@
 import {customElement, ka_create_element, ka_dom_ready, ka_sleep} from "@kasimirjs/embed";
 import {LeuOpenHours} from "../types/leu-openhours";
 import {OfficeHours} from "../business/office-hours";
+import {markdownToHtml} from "../helper/functions";
 
 
 
@@ -44,7 +45,7 @@ export class LiwecoVacationModal extends HTMLElement {
         let msgCount = 0;
         for (let curVac of openhours.getUpcomingVacation(null)) {
             msgCount++;
-            ka_create_element("p", {"data-owner": "liweco-vacaction"}, curVac.title, newsDiv);
+            ka_create_element("p", {"data-owner": "liweco-vacaction"}, null, newsDiv).innerHTML = markdownToHtml(curVac.title);
         }
 
         if (msgCount === 0) {
