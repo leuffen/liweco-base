@@ -89,7 +89,10 @@ export class LiwecoVacationModal extends HTMLElement {
         }
         let openhoursData : LeuOpenHours = window["openhours"];
 
-
+        if (! Array.isArray(openhoursData.vacation)) {
+            console.error("[liweco-vacation-modal] window.openhours.vacation is not a array");
+            return;
+        }
         let openhours = new OfficeHours();
         openhours.loadStruct(openhoursData);
 

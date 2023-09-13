@@ -147,6 +147,9 @@ export class OfficeHours {
         });
 
         // Load vacations
+        if ( ! Array.isArray(inputData.vacation)) {
+            return;
+        }
         inputData.vacation.forEach(vac => {
             this.addVacation(vac.from, vac.till, vac.title, vac.text);
         });
