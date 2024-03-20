@@ -17,11 +17,11 @@ class LiwecoCollapseOpenhourTable extends HTMLElement {
         let dayNames = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
         let dayName = dayNames[(new Date()).getDay()];
         let table = this.querySelector("table");
-        if ( ! table.textContent.match(new RegExp( dayName , "im")))
+        if ( ! table.textContent.match(new RegExp( dayName , "m")))
             return;
         table.classList.add("mb-0");
         for (let el of Array.from(table.querySelectorAll("tr"))) {
-            if (el.textContent.match(new RegExp( dayName , "im"))) {
+            if (el.textContent.match(new RegExp( dayName , "m"))) {
                 el.firstElementChild.textContent = dayName + " (heute)";
                 //el.classList.add("text-primary");
             } else {
