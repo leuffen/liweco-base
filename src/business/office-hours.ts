@@ -47,7 +47,8 @@ export class OfficeHours {
 
     addVacation(fromDate: Date | string, tillDate: Date | string, title: string, text: string): void {
         this.vacations.push({
-            fromDate: OfficeHours.convertToDateTime(fromDate),
+            fromDate: (fromDate !== null && fromDate !== "") ? OfficeHours.convertToDateTime(fromDate) : null,
+
             tillDate: OfficeHours.convertToDateTime(tillDate),
             title,
             text
@@ -57,7 +58,7 @@ export class OfficeHours {
     isVacation(date: Date | string | null = null): boolean {
         const dateTime = OfficeHours.convertToDateTime(date);
         return this.vacations.some(vacation =>
-            dateTime >= vacation.fromDate && dateTime <= vacation.tillDate);
+            vacation.fromDate !== null && dateTime >= vacation.fromDate && dateTime <= vacation.tillDate);
     }
 
     getVacation(date: Date | string | null = null): { title: string, text: string } | null {
