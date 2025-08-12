@@ -62,13 +62,13 @@ export class OfficeHours {
     }
 
     isVacation(date: Date | string | null = null): boolean {
-        const dateTime = OfficeHours.convertToDateTime(date);
+        const dateTime = OfficeHours.convertToDateTime(date ?? new Date());
         return this.vacations.some(vacation =>
             vacation.fromDate !== null && dateTime >= vacation.fromDate && dateTime <= vacation.tillDate);
     }
 
     getVacation(date: Date | string | null = null): { title: string, text: string } | null {
-        const dateTime = OfficeHours.convertToDateTime(date);
+        const dateTime = OfficeHours.convertToDateTime(date ?? new Date());
         const vacation = this.vacations.find(vac =>
             dateTime >= vac.fromDate && dateTime <= vac.tillDate);
         return vacation ? { title: vacation.title, text: vacation.text } : null;

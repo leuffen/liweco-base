@@ -96,6 +96,7 @@ export class LiwecoVacationModal extends HTMLElement {
         let openhours = new OfficeHours();
         openhours.loadStruct(openhoursData);
 
+        console.log("[liweco-vacation-modal] openhours loaded", openhours);
 
         this.showElement = ka_create_element("div", {"owner": "leu-vacation-modal"}) as HTMLDivElement;
         document.body.append(this.showElement);
@@ -110,6 +111,7 @@ export class LiwecoVacationModal extends HTMLElement {
 
 
         if (openhours.isVacation(null)) {
+            console.log("[liweco-vacation-modal] showing vacation modal");
             this.show(openhours.getVacation(null));
         }
 
