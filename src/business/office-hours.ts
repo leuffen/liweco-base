@@ -29,7 +29,10 @@ export class OfficeHours {
 
 
 
-    private static convertToDateTime(input: Date | string | null): Date {
+    private static convertToDateTime(input: Date | string | null): Date | null {
+        if (input === null || input === undefined) {
+            return null;
+        }
         if (input instanceof Date) {
             return input;
         } else if (typeof input === 'string') {
@@ -46,10 +49,11 @@ export class OfficeHours {
     }
 
     addVacation(fromDate: Date | string, tillDate: Date | string, title: string, text: string): void {
+        let tillDateEod = OfficeHours.convertToDateTime(tillDate);
+        tillDateEod.setHours(23, 59, 59, 999); // Set to end of day
         this.vacations.push({
-            fromDate: (fromDate !== null && fromDate !== "") ? OfficeHours.convertToDateTime(fromDate) : null,
-
-            tillDate: OfficeHours.convertToDateTime(tillDate),
+            fromDate: OfficeHours.convertToDateTime(fromDate),
+            tillDate: tillDateEod, // Set to end of day
             title,
             text
         });
