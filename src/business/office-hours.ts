@@ -50,7 +50,9 @@ export class OfficeHours {
 
     addVacation(fromDate: Date | string, tillDate: Date | string, title: string, text: string): void {
         let tillDateEod = OfficeHours.convertToDateTime(tillDate);
-        tillDateEod.setHours(23, 59, 59, 999); // Set to end of day
+        if (tillDateEod instanceof Date) {
+            tillDateEod.setHours(23, 59, 59, 999); // Set to end of day
+        }
         this.vacations.push({
             fromDate: OfficeHours.convertToDateTime(fromDate),
             tillDate: tillDateEod, // Set to end of day
